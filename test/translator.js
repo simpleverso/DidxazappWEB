@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const jsonData = {};
 
     // Define an array of alphabet letters.
-    const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+    const alphabet = "a".split("");
 
     // Function to load JSON data for a specific letter.
     function loadJSON(letter) {
