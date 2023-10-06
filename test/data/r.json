@@ -1,1 +1,19 @@
-
+{
+  "words": [
+    {
+      "spanish": "ralabra1",
+      "english": "rord1",
+      "enable": true,
+      "pronunciations": [
+        { "part": "pa", "type": "low" },
+        { "part": "lab", "type": "high" }
+      ]
+    },
+    {
+      "spanish": "palabra2",
+      "english": "word2",
+      "enable": false,
+      "pronunciations": []
+    }
+  ]
+}
