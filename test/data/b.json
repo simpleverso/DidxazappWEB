@@ -1,1 +1,20 @@
-
+{
+  "words": [
+    {
+      "spanish": "balabra1",
+      "english": "bord1",
+      "enable": true,
+      "pronunciations": [
+        { "part": "pa", "type": "low" },
+        { "part": "lab", "type": "high" }
+      ]
+    },
+    {
+      "spanish": "palabra2",
+      "english": "word2",
+      "enable": false,
+      "pronunciations": []
+    },
+    // Add more word objects as needed
+  ]
+}
