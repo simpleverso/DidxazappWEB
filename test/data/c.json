@@ -14,7 +14,6 @@
       "english": "word2",
       "enable": false,
       "pronunciations": []
-    },
-    // Add more word objects as needed
+    }
   ]
 }
