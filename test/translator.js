@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     const translationResult = document.getElementById("translationResult");
     const pronunciationCheckbox = document.getElementById("pronunciationCheckbox");
+    const searchPhraseInput = document.getElementById("searchPhrase");
+    const translateButton = document.getElementById("translateButton");
+    const translationResultPhrase = document.getElementById("translationResultPhrase");
 
     // Define an array to store the loaded JSON data for each letter.
     const jsonData = {};
 
     // Define an array of alphabet letters.
-    const alphabet = "a".split("");
+    const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 
     // Function to load JSON data for a specific letter.
     function loadJSON(letter) {
@@ -39,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(() => {
                 translationResult.textContent = "All data files have been loaded!";
                 pronunciationCheckbox.removeAttribute("disabled");
-                displayWords();
+                translateButton.removeAttribute("disabled");
             })
             .catch((error) => {
                 translationResult.textContent = "Error loading data files: " + error;
@@ -47,8 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Function to filter and display words based on the "enable" attribute and pronunciation.
-    function displayWords() {
-        const enableFilter = pronunciationCheckbox.checked;
+    function displayWords(enableFilter) {
         let result = "";
         alphabet.forEach((letter) => {
             if (jsonData[letter]) {
@@ -74,6 +76,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Event listener for the enable filter checkbox.
     pronunciationCheckbox.addEventListener("change", displayWords);
+
+    // Event listener for the translate button.
+    translateButton.addEventListener("click", () => {
+        const inputPhrase = searchPhraseInput.value.trim();
+        const words = inputPhrase.split(/\s+/); // Split the input phrase into words
+        let result = "";
+
+        words.forEach((word) => {
+            const translatedWord = translateWord(word.toLowerCase());
+            result += `<p>${word}: ${translatedWord}</p>`;
+        });
+
+        translationResultPhrase.innerHTML = result;
+    });
+
+    // Function to translate a single word.
+    function translateWord(word) {
+        for (const letter of alphabet) {
+            if (jsonData[letter]) {
+                const matchingWord = jsonData[letter].words.find((w) => w.spanish === word);
+                if (matchingWord && matchingWord.enable) {
+                    return matchingWord.english;
+                }
+            }
+        }
+        return "Not found";
+    }
 
     // Start loading JSON files when the page loads.
     loadAllJSONFiles();
