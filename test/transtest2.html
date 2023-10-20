@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+</head>
+<body>
+    <h1>Response from Server</h1>
+    <input type="text" id="inputValue" placeholder="Enter a value">
+    <button id="submitButton">Submit</button>
+    <p id="response"></p>
+
+    <script>
+        const responseElement = document.getElementById('response');
+        const inputValue = document.getElementById('inputValue');
+        const submitButton = document.getElementById('submitButton');
+
+        submitButton.addEventListener('click', () => {
+            const name = inputValue.value;
+
+            // Define a callback function to handle the JSONP response
+            window.handleJsonpResponse = function (data) {
+                const responseMessage = processJsonpData(data);
+                responseElement.textContent = responseMessage;
+            };
+
+            // Make a JSONP request by dynamically creating a script tag
+            const script = document.createElement('script');
+            script.src = `https://aulex.org/es-trs/?busca=${name}&callback=handleJsonpResponse`;
+            document.body.appendChild(script);
+        });
+
+        // Function to process the JSONP data (modify as needed)
+        function processJsonpData(data) {
+            // You may need to parse and manipulate the data as required
+            return data;
+        }
+    </script>
+</body>
+</html>
