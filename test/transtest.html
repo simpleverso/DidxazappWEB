@@ -25,7 +25,10 @@
             const name = inputValue.value;
 
             // Make an HTTP GET request
-            fetch(`https://aulex.org/es-trs/?busca=${name}`)
+            //fetch(`https://aulex.org/es-trs/?busca=${name}`)
+             fetch(`https://aulex.org/es-trs/?busca=${name}`, {
+                mode: 'no-cors'
+            })
                 .then(response => response.text())
                 .then(pageContents => {
                     // Split the content
