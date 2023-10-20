@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Page</title>
+</head>
+<body>
+    <h1>Response from Server</h1>
+    <input type="text" id="inputValue" placeholder="Enter a value">
+    <button id="submitButton">Submit</button>
+    <p id="response"></p>
+
+    <script>
+        // Function to remove HTML tags from a string
+        function removeHtmlTags(input) {
+            const div = document.createElement('div');
+            div.innerHTML = input;
+            return div.textContent || div.innerText;
+        }
+
+        const responseElement = document.getElementById('response');
+        const inputValue = document.getElementById('inputValue');
+        const submitButton = document.getElementById('submitButton');
+
+        submitButton.addEventListener('click', () => {
+            const name = inputValue.value;
+
+            // Make an HTTP GET request
+            fetch(`https://aulex.org/es-trs/?busca=${name}`)
+                .then(response => response.text())
+                .then(pageContents => {
+                    // Split the content
+                    const pedazos = pageContents.split("<!--Comienza contendio-->");
+                    pageContents = pedazos[1];
+
+                    if (pageContents.includes("No hay resultados para")) {
+                        pageContents = "Sin resultados";
+                    } else {
+                        pageContents = pageContents.substring(108, pageContents.length - 355);
+                        pageContents = pageContents.replace(/<p><span class=dict>/g, '');
+                        pageContents = pageContents.replace(/&laquo;/g, '');
+                        pageContents = pageContents.replace(/<\/EM>/g, '');
+                        pageContents = pageContents.replace(/<EM>/g, '');
+                        pageContents = pageContents.replace(/<\/span>/g, '');
+                        pageContents = pageContents.replace(/<i>/g, '');
+                        pageContents = pageContents.replace(/<U>/g, '');
+                        pageContents = pageContents.replace(/<\/i>/g, '');
+                        pageContents = pageContents.replace(/<\/U>/g, '');
+                        pageContents = pageContents.replace(/:/g, '-->');
+                        pageContents = pageContents.replace(/<\/p>/g, '');
+                    }
+
+                    // Set the response message
+                    const responseMessage = pageContents;
+
+                    // Display the response
+                    responseElement.textContent = responseMessage;
+                })
+                .catch(error => {
+                    console.error(error);
+                    responseElement.textContent = 'Internal Server Error';
+                });
+        });
+    </script>
+</body>
+</html>
