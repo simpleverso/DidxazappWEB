@@ -234,6 +234,7 @@ function processOptions() {
     } else 
 	{
 		todoActivo = false; 
+		document.body.innerHTML =  "<h4 class=\"text-center\" data-bs-hover-animate=\"pulse\">En mantenimiento, intente usar biyubi.com</h4>";
 	}
     }
   });
@@ -265,10 +266,6 @@ var dx4 = true;
 var dx5 = true;
 var dx6 = true;
 	 
-if (todoActivo==false)
-{
-    document.body.innerHTML =  "<h4 class=\"text-center\" data-bs-hover-animate=\"pulse\">En mantenimiento, intente usar biyubi.com</h4>";
-}
 	 
 function showAlert(text) {
     window.alert(text);
