@@ -163,6 +163,14 @@ var didxazappActivo = false;
 var toledoActivo = false;
 var fundacionJuchitanActivo = false; //fallando desde
 
+var dx1 = false;
+var dx2 = true;
+var dx3 = true;
+var dx4 = true;
+var dx5 = true;
+var dx6 = true;
+
+
 function fetchOptions(url, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
@@ -205,11 +213,11 @@ function processOptions() {
     }
 
     if (options.enable_sierra) {
-      // Enable sierra option
-      console.log('sierra enabled');
-    } else {
-      // Disable sierra option
-      console.log('sierra disabled');
+		fundacionJuchitanActivo = true;
+    } 
+	else 
+	{
+		fundacionJuchitanActivo = false;
     }
 
     if (options.enable_otomi) {
@@ -236,6 +244,51 @@ function processOptions() {
 		todoActivo = false; 
 		document.body.innerHTML =  "<h4 class=\"text-center\" data-bs-hover-animate=\"pulse\">En mantenimiento, intente usar biyubi.com</h4>";
 	}
+
+	if (options.enable_dx1) 
+	{
+		dx1 = true;
+    } 
+	else 
+	{ 
+		dx1 = false;
+    }
+
+	if (options.enable_dx2) 
+	{
+		dx2 = true;
+    } 
+	else 
+	{ 
+		dx2 = false;
+    }
+
+	if (options.enable_dx3) 
+	{
+		dx3 = true;
+    } 
+	else 
+	{ 
+		dx3 = false;
+    }
+
+	if (options.enable_dx4) 
+	{
+		dx4 = true;
+    } 
+	else 
+	{ 
+		dx4 = false;
+    }
+
+	if (options.enable_dx5) 
+	{
+		dx5 = true;
+    } 
+	else 
+	{ 
+		dx5 = false;
+    }
     }
   });
 }
@@ -259,12 +312,7 @@ function onKeyUp(event) {
   }
 	 
 
-var dx1 = true;
-var dx2 = true;
-var dx3 = true;
-var dx4 = true;
-var dx5 = true;
-var dx6 = true;
+
 	 
 	 
 function showAlert(text) {
