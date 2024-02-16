@@ -164,22 +164,46 @@ var toledoActivo = false;
 var fundacionJuchitanActivo = false; //fallando desde
 	 
 
-async function fetchOptions(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching options:', error);
-    return null;
-  }
+//async function fetchOptions(url) {
+//  try {
+//    const response = await fetch(url);
+//    const data = await response.json();
+//    return data;
+//  } catch (error) {
+//    console.error('Error fetching options:', error);
+//    return null;
+//  }
+//}
+
+// Call the function to start processing options
+processOptions();
+
+
+function fetchOptions(url, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        const data = JSON.parse(xhr.responseText);
+        callback(data);
+      } else {
+        console.error('Error fetching options:', xhr.statusText);
+        callback(null);
+      }
+    }
+  };
+  xhr.open('GET', url, true);
+  xhr.send();
 }
 
-async function processOptions() {
+//async function processOptions() {
+//  const optionsUrl = 'https://simpleverso.github.io/DidxazappWEB/config.json';
+//  const options = await fetchOptions(optionsUrl);
+function processOptions() {
   const optionsUrl = 'https://simpleverso.github.io/DidxazappWEB/config.json';
-  const options = await fetchOptions(optionsUrl);
-
-  if (options) {
+  fetchOptions(optionsUrl, function(options) {
+  if (options) 
+  {
     if (options.enable_didxazapp) 
 	{
 		didxazappActivo = true;
@@ -226,8 +250,9 @@ async function processOptions() {
     } else 
 	{
 		todoActivo = false; 
+	}
     }
-  }
+  });
 }
 
 // Call the function to start processing options
