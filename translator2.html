@@ -185,7 +185,7 @@ async function processOptions() {
 		didxazappActivo = true;
     } else 
 	{
-		didxazappActivo = true; 
+		didxazappActivo = false; 
     }
 
     if (options.enable_toledo) 
@@ -193,7 +193,7 @@ async function processOptions() {
 		toledoActivo = true;
     } else 
 	{
-		toledoActivo = true;
+		toledoActivo = false;
     }
 
     if (options.enable_sierra) {
@@ -225,15 +225,13 @@ async function processOptions() {
 		todoActivo = true;
     } else 
 	{
-		todoActivo = true; 
+		todoActivo = false; 
     }
   }
 }
 
 // Call the function to start processing options
 processOptions();
-
-
 
 
 /* global txt_familia_toleto */
