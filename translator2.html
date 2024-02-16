@@ -158,6 +158,84 @@ body {
 
  <script>
 
+var todoActivo = true;
+var didxazappActivo = false;
+var toledoActivo = false;
+var fundacionJuchitanActivo = false; //fallando desde
+	 
+
+async function fetchOptions(url) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching options:', error);
+    return null;
+  }
+}
+
+async function processOptions() {
+  const optionsUrl = 'https://simpleverso.github.io/DidxazappWEB/config.json';
+  const options = await fetchOptions(optionsUrl);
+
+  if (options) {
+    if (options.enable_didxazapp) 
+	{
+		didxazappActivo = true;
+    } else 
+	{
+		didxazappActivo = true; 
+    }
+
+    if (options.enable_toledo) 
+	{
+		toledoActivo = true;
+    } else 
+	{
+		toledoActivo = true;
+    }
+
+    if (options.enable_sierra) {
+      // Enable sierra option
+      console.log('sierra enabled');
+    } else {
+      // Disable sierra option
+      console.log('sierra disabled');
+    }
+
+    if (options.enable_otomi) {
+      // Enable otomi option
+      console.log('otomi enabled');
+    } else {
+      // Disable otomi option
+      console.log('otomi disabled');
+    }
+
+    if (options.enable_nahuatl) {
+      // Enable nahuatl option
+      console.log('nahuatl enabled');
+    } else {
+      // Disable nahuatl option
+      console.log('nahuatl disabled');
+    }
+
+    if (options.enable_todo) 
+	{
+		todoActivo = true;
+    } else 
+	{
+		todoActivo = true; 
+    }
+  }
+}
+
+// Call the function to start processing options
+processOptions();
+
+
+
+
 /* global txt_familia_toleto */
 /* global txt_res_didxazapp */
 /* global txt_texto_espanish */
@@ -172,11 +250,7 @@ function onKeyUp(event) {
     }
   }
 	 
-var todoActivo = true;
-var didxazappActivo = true;
-var toledoActivo = true;
-var fundacionJuchitanActivo = true; //fallando desde
-	 
+
 var dx1 = true;
 var dx2 = true;
 var dx3 = true;
